@@ -46,6 +46,7 @@ temp$strand <- NULL       # set witdth column as NULL
 temp <- cbind(temp, p-value= 10^-10/a$score)      # replicate has its p-value with all relevant column
 
 # step 5: start this gene replicate where p-value column also added; start to do peak classification
+peak<- Replicate[1:nrow(Replicate),]
 
 
 
