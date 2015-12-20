@@ -1,3 +1,5 @@
+##############  Fisher' Exact Test    ##############
+
 test_fisher_exact = function(geneset,gpw,alternative="two.sided") {
   # Restrict to only those genes in the genesets.
   gpw = subset(gpw,geneid %in% geneset@all.genes);
@@ -61,3 +63,33 @@ test_fisher_exact = function(geneset,gpw,alternative="two.sided") {
   results = results[order(results$P.value),];
   return(results);
 }
+
+
+##############  collect peak analysis result; construct new data.frame for it    ##############
+
+# Collapse results into one table
+  results = Reduce(rbind,results_list)
+
+  # Correct for multiple testing
+  results$FDR = p.adjust(results$P.value, method="BH");
+
+  # Create enriched/depleted status column
+  results$Status = ifelse(results$Effect > 0, 'enriched', 'depleted')
+
+  results = results[order(results$P.value),];
+
+  return(results);
+  
+
+##############  restrict the source peak to target genes in genesets    ##############
+   # Restrict our genes/weights/peaks to only those genes in the genesets.
+  gpw = subset(gpw,geneid %in% geneset@all.genes);
+
+  if (sum(gpw$peak) == 0) {
+    stop("Error: no peaks in your data!");
+  }
+  
+  
+  
+  
+  
