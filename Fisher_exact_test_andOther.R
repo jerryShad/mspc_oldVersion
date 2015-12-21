@@ -152,6 +152,12 @@ test_fisher_exact = function(geneset,gpw,alternative="two.sided") {
     ranges=IRanges(d$start,d$end),
     names=d$geneid
   );
+  
+  ##############  IRanges objects manipulation    ############## 
+  gc()
+  IR <- IRanges::IRanges(chropmStart = Replicate$chromStart, chromEnd = Replicate$chromEnd)
+  gc()
+  IRanges::RangedData(IR, chrom = Replicate$chrom, name = Replicate$name, pvalue=Replicate$pvalue)
 
 
   ##############  pull out the peak that didn't pass the Fisher' test    ############## 
