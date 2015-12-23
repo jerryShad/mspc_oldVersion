@@ -12,3 +12,10 @@ results<-IRanges::as.data.frame(overlap)
       
       overlap<-findOverlap(peak_IR, target_gene, algorithm=" intervaltree")
     }
+    
+    
+ ## this is how the parameter to be verified:
+ ## for instance, we are checking required parameter in findOverlap() function
+   type <- match.arg(type)
+   select <- match.arg(select)
+   algorithm <- match.arg(algorithm)
