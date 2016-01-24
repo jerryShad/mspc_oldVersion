@@ -1,0 +1,20 @@
+## IDEA from bioconductor support community
+
+# consider 2 GRanges objects
+
+anyHits <- findOverlaps(gr2, gr1)
+withinHits <- findOverlaps(gr2, gr1, type="within")
+setdiff(anyHits, withinHits)
+
+
+## call findOverlap() from GenomicRanges packages
+hits <- findOverlaps(query, subject, ...)
+overlap <- pintersect(query[queryHits(hits)],
+                      subject[subjectHits(hits)])
+                      
+width(overlap)
+
+
+## Question: Quantifying peaks corresponding to a purticular feature
+## Answer: A possible solution is define the genomic region as a GRanges object and use the findOverlaps from GenomicFeatures package
+##          to get the peaks that overlap with the genomic region. Then you can count the number of peaks.
